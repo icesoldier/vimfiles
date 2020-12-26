@@ -28,6 +28,17 @@ function! s:do_startup()
     endif
 endfunction
 
+function! s:edit_machine_file()
+    if exists('g:misdreavus_ghost_machine_file')
+        execute 'edit ' . g:misdreavus_ghost_machine_file
+    else
+        echoerr 'no directory set to store ghost-machine files'
+        echoerr 'help: set g:misdreavus_ghost_machine_dir to a directory path in your vimrc'
+    endif
+endfunction
+
+command! -nargs=0 EditMachineFile call s:edit_machine_file()
+
 if v:vim_did_enter
     call s:do_startup()
 else
