@@ -30,7 +30,7 @@ endfunction
 function! s:edit_scratch()
     let bufname = s:mk_buffer()
 
-    execute 'buffer ' . bufname
+    execute 'buffer ' . escape(bufname, ' \')
 endfunction
 
 function! s:split_scratch(is_vert = v:false)
@@ -41,7 +41,7 @@ function! s:split_scratch(is_vert = v:false)
         let command .= 'vertical '
     endif
 
-    execute command . 'sbuffer ' . bufname
+    execute command . 'sbuffer ' . escape(bufname, ' \')
 endfunction
 
 command! -nargs=0 EditScratch call s:edit_scratch()
