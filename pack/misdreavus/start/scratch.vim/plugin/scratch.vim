@@ -33,7 +33,7 @@ function! s:edit_scratch()
     execute 'buffer ' . escape(bufname, ' \')
 endfunction
 
-function! s:split_scratch(is_vert = v:false)
+function! s:split_scratch(comcount, is_vert = v:false)
     let bufname = s:mk_buffer()
 
     let command = ''
@@ -42,8 +42,16 @@ function! s:split_scratch(is_vert = v:false)
     endif
 
     execute command . 'sbuffer ' . escape(bufname, ' \')
+
+    if a:comcount > 0
+        if a:is_vert
+            execute 'vertical resize ' . a:comcount
+        else
+            execute 'resize ' . a:comcount
+        endif
+    endif
 endfunction
 
 command! -nargs=0 EditScratch call s:edit_scratch()
-command! -nargs=0 SplitScratch call s:split_scratch()
-command! -nargs=0 VSplitScratch call s:split_scratch(v:true)
+command! -count -nargs=0 SplitScratch call s:split_scratch(<count>)
+command! -count -nargs=0 VSplitScratch call s:split_scratch(<count>, v:true)
