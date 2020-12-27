@@ -27,6 +27,12 @@ function! s:mk_buffer()
     return bufname
 endfunction
 
+function! s:edit_scratch()
+    let bufname = s:mk_buffer()
+
+    execute 'buffer ' . bufname
+endfunction
+
 function! s:split_scratch(is_vert = v:false)
     let bufname = s:mk_buffer()
 
@@ -38,5 +44,6 @@ function! s:split_scratch(is_vert = v:false)
     execute command . 'sbuffer ' . bufname
 endfunction
 
+command! -nargs=0 EditScratch call s:edit_scratch()
 command! -nargs=0 SplitScratch call s:split_scratch()
 command! -nargs=0 VSplitScratch call s:split_scratch(v:true)
