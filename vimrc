@@ -33,6 +33,7 @@ set splitright        " split new vertical windows to the right of the current o
 set path+=**          " allow `:find`, tab-completion et al to search through subdirectories
 set laststatus=2      " always show status line
 set ttimeoutlen=500   " time out commands at 0.5sec, so the mode display is a little faster
+set nojoinspaces      " don't add a second space when joining lines around .?!
 
 " show tab complete menu and tab-complete to the longest substring
 " pressing tab again will start to cycle through the list
