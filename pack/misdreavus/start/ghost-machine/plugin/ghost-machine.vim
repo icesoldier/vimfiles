@@ -22,6 +22,17 @@ function! s:do_startup()
                     \ . hostname()
                     \ . '.vim'
 
+        if !filereadable(g:misdreavus_ghost_machine_file) &&
+                    \ match(hostname(), '.local$') != -1 || match(hostname(), '.lan$') != -1
+            " sometimes hostnames in macOS show up as Name.local or Name.lan - strip
+            " out the suffix and use that if the 'real' hostname turns up empty
+            let g:misdreavus_ghost_machine_file =
+                        \ g:misdreavus_ghost_machine_dir
+                        \ . '/'
+                        \ . fnamemodify(hostname(), ':r')
+                        \ . '.vim'
+        endif
+
         if filereadable(g:misdreavus_ghost_machine_file)
             execute 'source ' . g:misdreavus_ghost_machine_file
         endif
