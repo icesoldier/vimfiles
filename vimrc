@@ -233,6 +233,12 @@ let g:ale_linter_aliases = {}
 " as above, 'bash' isn't an expected filetype, so tell ALE to enable the 'sh' linters there
 let g:ale_linter_aliases["bash"] = ['sh']
 
+" configure specific linters to disable
+let g:ale_linters_ignore = {}
+" the warning outputs from gcc and clang are fairly noisy when run on a single file, so skip it
+let g:ale_linters_ignore["cpp"] = ['gcc', 'clang', 'clangd']
+let g:ale_linters_ignore["c"] = ['gcc', 'clang', 'clangd']
+
 " when running `shellcheck`, don't show warnings about `source`ing external files
 let g:ale_sh_shellcheck_options = '--exclude=SC1090'
 
